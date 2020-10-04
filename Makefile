@@ -1,5 +1,6 @@
 FLAGS = -Wall -Werror
-LIBLUAPATH = /usr/local/lib/lua/5.3
+LIBLUAPATH_5_3 = /usr/local/lib/lua/5.3
+LIBLUAPATH_5_4 = /usr/local/lib/lua/5.4
 LIBPATH = /usr/lib64
 
 all : gestionFS.so
@@ -11,7 +12,9 @@ gestionFS.so : gestionFS.o
 	gcc -shared gestionFS.o $(NC) -o gestionFS.so
 
 install : 
-	cp -f gestionFS.so $(LIBLUAPATH)/gestionFS.so
+	mkdir -p $(LIBLUAPATH_5_3) $(LIBLUAPATH_5_4) $(LIBPATH)
+	cp -f gestionFS.so $(LIBLUAPATH_5_3)/gestionFS.so
+	cp -f gestionFS.so $(LIBLUAPATH_5_4)/gestionFS.so
 	cp -f gestionFS.so $(LIBPATH)/libgestionFS.so
 
 uninstall :
